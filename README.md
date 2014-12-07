@@ -19,3 +19,6 @@ Base layer of a stack of (probaby three) classes for RPT'ing (register_post_type
 - The next layer up serves as a goto / boilerplate that configures - this is the important bit - a particular type of CPT. For example: https://github.com/WPezClasses/class-wp-ezclasses-cpt-rpt-1-public-exclude-from-search-1.  Again, you lean on this but there's nothing for you to change here. Chances are you'd create a new class for a new middle layer if necessary.
 
 - Finally, on top (so to speak) is where you'll define a handful of setting that are unique to your CPT. For that, use this: https://github.com/WPezClasses/class-wp-ezclasses-cpt-rpt-1-boilerplate-1. This *is* where you'll be making any changes. Notice how few TODOs it takes to get a CPT up and running. 
+
+
+Note: While it's possible to skip the middle layer (and move all particulars to the top), that's not going to help accomplish one of our primary goals: increase productivity by minimizing duplicate code / effort. 
