@@ -28,8 +28,8 @@ if ( ! defined('ABSPATH') ) {
 if ( ! class_exists('Class_WP_ezClasses_CPT_RPT_1' ) ){
 	class Class_WP_ezClasses_CPT_RPT_1 extends Class_WP_ezClasses_Master_Singleton {
 	
-		protected $_rpt_name;
-		protected $_args_all;
+		protected $_str_post_type;
+		protected $_arr_args_all;
 		
 		
 		protected function __construct() {	
@@ -44,10 +44,10 @@ if ( ! class_exists('Class_WP_ezClasses_CPT_RPT_1' ) ){
 		
 			if ( WPezHelpers::ez_array_pass($arr_args) ){
 
-				if ( isset($arr_args['rpt_name']) && WPezHelpers::ez_array_key_pass($arr_args, 'labels') && WPezHelpers::ez_array_key_pass($arr_args, 'supports') && WPezHelpers::ez_array_key_pass($arr_args, 'arguments') ){
+				if ( isset($arr_args['post_type']) && WPezHelpers::ez_array_key_pass($arr_args, 'labels') && WPezHelpers::ez_array_key_pass($arr_args, 'supports') && WPezHelpers::ez_array_key_pass($arr_args, 'arguments') ){
 							
 					// name
-					$this->_rpt_name = $arr_args['rpt_name'];
+					$this->_str_post_type = $arr_args['post_type'];
 					
 					// labels
 					$arr_labels = WPezHelpers::ez_array_merge( array($this->labels_defaults(), $arr_args['labels']) );
@@ -66,18 +66,16 @@ if ( ! class_exists('Class_WP_ezClasses_CPT_RPT_1' ) ){
 					$arr_arguments['supports'] = $arr_supports;
 					
 					// do we have an custom capabilities?
-					$arr_capabilities = $this->capabilities_settings();
-					if ( WPezHelpers::ez_array_pass( $arr_capabilities ) ){
-					
-					  unnset($arr_arguments['capability_type']);   // TODO - is this unset necessary?
-				      $arr_arguments['capabilities'] = $arr_capabilities;
+					$arr_arguments['capabilities'] = $this->capabilities_settings();
+					if ( WPezHelpers::ez_array_pass( $arr_args['capabilities'] ) ){
+				      $arr_arguments['capabilities'] = $arr_args['capabilities'];
 					}
 					
 					if ( isset($arr_args['arguments']['rewrite']) && is_array($arr_args['arguments']['rewrite']) ){
 						$arr_arguments['rewrite'] = $arr_args['arguments']['rewrite'];
 					}
 					
-					$this->_args_all = $arr_arguments;
+					$this->_arr_args_all = $arr_arguments;
 					
 					
 					$this->custom_post_type_register();
@@ -94,8 +92,10 @@ if ( ! class_exists('Class_WP_ezClasses_CPT_RPT_1' ) ){
 		 * This is where the magic happens. Everything else is to simplify the lead up to this moment. If you see the end, then the means is easier to understand. 
 		 */
 		public function custom_post_type_register(){
+		
+	//	print_r($this->_arr_args_all);
 			
-			register_post_type( $this->_rpt_name, $this->_args_all );
+			register_post_type( $this->_str_post_type, $this->_arr_args_all );
 		}
 		
 		
@@ -196,11 +196,11 @@ if ( ! class_exists('Class_WP_ezClasses_CPT_RPT_1' ) ){
 		}
 		
 		/*
-		 *
+		 * no defaults for this one
 		 */
-		public function capabilities_settings($arr_args = array()){
+		public function capabilities_settings(){
 		
-			$arr_capabilities = $arr_args;
+			$arr_capabilities = array();
 			
 			return $arr_capabilities;
 		}
