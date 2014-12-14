@@ -3,7 +3,7 @@
 
 ##### WordPress custom post types done The ezWay. 
 
-Base layer of a stack of (probaby three) classes for RPT'ing (register_post_type()) a new WP CPT.
+All the essential magic is distilled and consolidated into the cpt_todo() method. 
 
 =======================================================================================
 
@@ -14,11 +14,12 @@ Base layer of a stack of (probaby three) classes for RPT'ing (register_post_type
 
 #### Overview
 
-- This class (in this repo) serves as the base. It takes care of some simple housekeeping. You lean on this but there's nothing for you to change here. 
+1) Make a copy of the boilerplate - giving it your own unique file + class name - into your theme or plugin:
 
-- The next layer up serves as a goto / boilerplate that configures - this is the important bit - a particular type of CPT. For example: https://github.com/WPezClasses/class-wp-ezclasses-cpt-rpt-1-public-exclude-from-search-1.  Again, you lean on this but there's nothing for you to change here. Chances are you'd create a new class for a new middle layer if necessary.
+https://github.com/WPezClasses/class-wp-ezclasses-cpt-rpt-1-boilerplate-1
 
-- Finally, on top (so to speak) is where you'll define a handful of setting that are unique to your CPT. For that, use this: https://github.com/WPezClasses/class-wp-ezclasses-cpt-rpt-1-boilerplate-1. This *is* where you'll be making any changes. Notice how few TODOs it takes to get a CPT up and running. 
+2) Do the boilerplate's TODOs. 
 
+2.5) Don't forget to include / require it somewhere.
 
-Note: While it's possible to skip the middle layer (and move all particulars to the top), that's not going to help accomplish one of our primary goals: increase productivity by minimizing duplicate code / effort. 
+3) Your CPT is...Done! Yeah, that ez. 
